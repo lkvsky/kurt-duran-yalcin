@@ -1,18 +1,19 @@
-/* Nav styles */
 .timeline-container {
   /* though I hate using it... helps get the desired centering you're gonna want */
   display: table;
-  margin: 0 auto 0 auto;
+  margin: 0 auto 50px auto;
 }
 
-/* height and width are just there to test interaction */
 .information {
-  height: 200px;
-  width: 500px;
+  padding: 10px;
   border: 2px solid #2e2361;
   position: relative;
   /* should be half the value of the .nav-element margin-bottom */
   bottom: 20px;
+  /* box sizing is a CSS3 property that affects how the box model is calculated. By setting it here, we're telling the browser to calculate padding, border AND content with a height/weidth of X value */
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .information:last-of-type {
@@ -31,7 +32,6 @@
   border: 2px solid #2e2361;
   margin: 0 auto 40px auto;
   position: relative;
-  /* box sizing is a CSS3 property that affects how the box model is calculated. By setting it here, we're telling the browser to calculate padding, border AND content with a height/weidth of X value */
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -83,6 +83,23 @@
   color: white;
 }
 
+.toc {
+  border: 2px solid #2e2361;
+  position: absolute;
+  right: 10px;
+  padding: 10px;
+  width: 250px;
+}
+
+.toc-element {
+  display: block;
+}
+
+.toc-element.active {
+  font-weight: bold;
+  font-style: italic;
+}
+
 .link-text {
   display: block;
   text-align: center;
@@ -102,13 +119,25 @@ body {
 }
 
 a {
+  font-weight: bold;
+  color: #2e2361;
+}
+
+a:hover, a:visited {
+  color: #2e2361;
+  font-style: italic;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+a.nav-element {
   color: #272727;
 }
 
-a:visited, a:hover {
-  font-style: italic;
-  text-decoration: none;
-  color: #272727;
+a.nav-element:hover {
+  font-style: normal;
+  color: white;
+  background-color: #2e2361;
 }
 
 header {
@@ -135,4 +164,10 @@ header {
   content: " ";
   clear: both;
   height: 0;
+}
+
+@media (max-width: 670px) {
+  .toc {
+    display: none;
+  }
 }
