@@ -84,6 +84,7 @@
 }
 
 .toc {
+  display: none;
   border: 2px solid #2e2361;
   position: absolute;
   right: 10px;

@@ -23,7 +23,7 @@
         close: function () {
             $('.active').removeClass('active');
             App.ui.information.addClass('hide');
-            App.ui.toc.css('top', 0);
+            App.ui.toc.css('top', 'inherit');
         },
 
         open: function (toggle_value) {
