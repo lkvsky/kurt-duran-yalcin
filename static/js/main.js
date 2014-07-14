@@ -1,92 +1,46 @@
 (function() {
-  var App = {
+    var App = {
 
-    CONTENT_MAX: 9,
+        ui: {},
 
-    CONTENT_MIN: 1,
+        initialize: function () {
+            App.createElements();
+            App.attachEvents();
+        },
 
-    initialize: function() {
-      var self = this;
+        createElements: function () {
+          App.ui.nav_elements = $('.nav-element');
+          App.ui.information = $('.information');
+        },
 
-      self.createElements();
-      self.attachEvents();
-    },
+        attachEvents: function () {
+            App.ui.nav_elements.on('click', App.onNavElementClick);
+        },
 
-    createElements: function() {
-      var self = this;
+        close: function () {
+            $('.active').removeClass('active');
+            App.ui.information.addClass('hide');
+        },
 
-      self.grid = $('.grid');
-      self.content = $('.content');
-      self.tiles = $('.tile');
-      self.info_elements = $('.info');
-      self.exit = $('.exit');
-      self.next = $('.next');
-      self.back = $('.back');
-    },
+        onNavElementClick: function (e) {
+            var anchor = $(e.currentTarget),
+                toggle_value = anchor.attr('data-toggle'),
+                information = App.ui.information.filter('[data-toggle="' + toggle_value + '"]');
 
-    attachEvents: function() {
-      var self = this;
+            e.preventDefault();
 
-      self.tiles.click(self.onTileClick.bind(self));
-      self.exit.click(self.onExitClick.bind(self));
-      self.next.click(self.onNextClick.bind(self));
-      self.back.click(self.onBackClick.bind(self));
-    },
+            if (anchor.hasClass('active')) {
+                App.close();
+            } else {
+                App.close();
+                anchor.addClass('active');
+                information.removeClass('hide');
+            }
+        }
+    };
 
-    onTileClick: function(e) {
-      var self = this,
-          target = $(e.target).closest('.tile');
-
-      self.active_content = target.attr('data-content');
-      self.grid.addClass('hide');
-      self.content.removeClass('hide');
-      self.info_elements.filter('[data-content="' + self.active_content + '"]').removeClass('hide');
-    },
-
-    onExitClick: function(e) {
-      var self = this;
-
-      self.info_elements.addClass('hide');
-      self.content.addClass('hide');
-      self.grid.removeClass('hide');
-    },
-
-    onNextClick: function() {
-      var self = this,
-          active_content = parseInt(self.active_content, 10),
-          next_content = active_content + 1;
-
-      self.info_elements.addClass('hide');
-
-      if (active_content && next_content <= self.CONTENT_MAX) {
-        self.active_content = next_content;
-      } else {
-        self.active_content = self.CONTENT_MIN;
-      }
-
-      self.info_elements.filter('[data-content="' + self.active_content + '"]').removeClass('hide');
-    },
-
-    onBackClick: function() {
-      var self = this,
-          active_content = parseInt(self.active_content, 10),
-          next_content = active_content - 1;
-
-      self.info_elements.addClass('hide');
-
-      if (active_content && next_content >= self.CONTENT_MIN) {
-        self.active_content = next_content;
-      } else {
-        self.active_content = self.CONTENT_MAX;
-      }
-
-      self.info_elements.filter('[data-content="' + self.active_content + '"]').removeClass('hide');
-    }
-
-  };
-
-  $(document).ready(function() {
-    App.initialize();
-  });
+    $(document).ready(function() {
+        App.initialize();
+    });
 
 })();

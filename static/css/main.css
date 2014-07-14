@@ -1,145 +1,131 @@
-body, html {
-  background-color: white;
-  color: #555555;
-  width: 100%;
-  height: 100%;
-}
-
-h1 {
-  font-size: 5em;
-  font-weight: 300;
-  padding: 50px;
+/* Nav styles */
+.timeline-container {
+  /* though I hate using it... helps get the desired centering you're gonna want */
+  display: table;
   margin: 0 auto 0 auto;
-  text-align: center;
 }
 
-a, .red {
-  color: #cb4154;
-}
-
-a:hover {
-  color: #962938;
-  text-decoration: none;
-}
-
-.next, .back {
-  height: 20px;
-  width: 20px;
-  position: absolute;
-  top: 260px;
-  cursor: pointer;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-.next {
-  border-top: 5px solid #555555;
-  border-right: 5px solid #555555;
-  right: -50px;
-}
-
-.back {
-  border-left: 5px solid #555555;
-  border-bottom: 5px solid #555555;
-  left: -50px;
-}
-
-.exit {
-  position: absolute;
-  top: -13px;
-  right: -8px;
-  font-size: 2em;
-  font-weight: 900;
-}
-
-.exit:hover {
-  text-decoration: none;
-}
-
-.container {
-  margin: 10px auto 50px auto;
-  width: 585px;
-}
-
-.content {
+/* height and width are just there to test interaction */
+.information {
+  height: 200px;
+  width: 500px;
+  border: 2px solid #2e2361;
   position: relative;
-  border: 1px solid #DDD;
-  width: 100%;
-  padding: 20px;
-  min-height: 585px;
+  /* should be half the value of the .nav-element margin-bottom */
+  bottom: 20px;
+}
+
+.information:last-of-type {
+  bottom: 0;
+  top: 20px;
+}
+
+.nav-element {
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Karma', serif;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  display: block;
+  border: 2px solid #2e2361;
+  margin: 0 auto 40px auto;
+  position: relative;
+  /* box sizing is a CSS3 property that affects how the box model is calculated. By setting it here, we're telling the browser to calculate padding, border AND content with a height/weidth of X value */
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  -box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-.social {
+.nav-element:after {
   display: block;
+  content: '';
+  /* this height needs to match 1/2 of the margin-bottom value of .nav-element */
+  height: 20px;
+  /* the width/background color should mirror the border in the .nav-element */
+  width: 2px;
+  background-color: #2e2361;
+  /* this positions the timeline stick absolutely bottom/center of the node. In order for this to be absolutely positioned according to the parent element, we set the parent element's position to 'relative,' otherwise it would be positioned absolutely to the window. The top/left values correspond to the height and width of the element (minus the border) */
+  position: absolute;
+  top: 98px;
+  left: 48px;
 }
 
-.bio, .pinterest_description {
-  margin-top: 33%;
+/* this is the top of the node. we're using both :before and :after pseudo elements so that we can shove the box in between the nodes and make it appear as if everything's evenly connected*/
+.nav-element:before {
+  display: block;
+  content: '';
+  height: 20px;
+  width: 2px;
+  background-color: #2e2361;
+  position: absolute;
+  margin: 0 auto 0 auto;
+  position: absolute;
+  bottom: 98px;
+  left: 48px;
 }
 
-.info img.vertical {
+.nav-element:last-of-type {
   margin-bottom: 0;
 }
 
-.float_left {
-  float: left;
+.nav-element:last-of-type:after, .nav-element:first-of-type:before {
+  display: none;
 }
 
-.float_right {
-  float: right;
-}
-
-.pinterest_description {
-  width: 65%;
-}
-
-ul {
-  list-style: none;
-  text-align: left;
-}
-
-h4 {
-  text-align: left;
-}
-
-.info {
-  text-align: center;
-}
-
-.info img {
+.nav-element.active:last-of-type:after {
   display: block;
-  margin: 0 auto 20px auto;
-  max-height: 585px;
+  margin-bottom: 40px;
 }
 
-.tile {
-  border: 1px solid #DDD;
-  float: left;
-  width: 175px;
-  height: 175px;
-  margin: 10px;
-  cursor: pointer;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -box-sizing: border-box;
+.nav-element.active {
+  background-color: #2e2361;
+  color: white;
 }
 
-.tile img {
-  height: 100%;
-  width: 100%;
-  margin: 0;
+.link-text {
+  display: block;
+  text-align: center;
+  margin: 45% auto 0 auto;
+}
+
+/* Base styles */
+.wrapper {
+  /* shit gets weird when you allow the container to get too big, */
+  max-width: 940px;
+}
+
+body {
+  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
+  color: #272727;
+}
+
+a {
+  color: #272727;
+}
+
+a:visited, a:hover {
+  font-style: italic;
+  text-decoration: none;
+  color: #272727;
+}
+
+header {
+  font-weight: bold;
+  font-family: 'Karma', serif;
+  font-size: 32px;
+  text-align: center;
+  margin: 50px 0 50px 0;
+}
+
+/* Utility classes */
+.hide {
+  display: none;
 }
 
 .clearfix {
   display: block;
-}
-
-.hide {
-  display: none;
 }
 
 .clearfix:after {
