@@ -12,11 +12,12 @@ def is_devserver():
 
 class Main(webapp2.RequestHandler):
     def get(self):
-        values = {
-          'debug': is_devserver()
-        }
-        template = jinja_environment.get_template('templates/index.html')
-        self.response.out.write(template.render(values))
+        return webapp2.redirect('http://portfolio.kurtyalcin.com')
+        # values = {
+        #   'debug': is_devserver()
+        # }
+        # template = jinja_environment.get_template('templates/index.html')
+        # self.response.out.write(template.render(values))
 
 
 app = webapp2.WSGIApplication([('/', Main)],  debug=True)
